@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Profile
+from .models import Profile, Tags, Project
 from django.contrib.auth.models import User
 import factory
 from django.db.models import signals
@@ -61,3 +61,47 @@ class ProfileModelTests(TestCase):
         profileuno.delete_profile()
         profiles = Profile.objects.all()
         self.assertTrue(len(profiles) == 0)
+
+class TagsModelTests(TestCase):
+    """
+    class facilitates the creation of unit tests for tags model's behavior
+    """
+    def setUp(self):
+        """
+        method defines the properties of tags' objects before each test
+        """
+        self.tags = Tags(name='animation')
+    
+    def test_instance(self):
+        """
+        method checks if a tags object is initialized properly
+        """
+        self.assertIsInstance(self.tags, Tags)
+    
+    def test_save_tag(self):
+        """
+        method checks if an added tag is saved
+        """
+        self.tags.save_tags()
+        tags = Tags.objects.all()
+        self.assertTrue(len(tags) > 0)
+    
+    def test_update_tag(self):
+        """
+        method check if saved tag can be updated
+        """
+        self.tags.save_tags()
+        Tags.objects.filter(pk=self.tags.pk).update(name='CSS3')
+        self.tags.update_tags()
+        self.assertEqual(self.tags.name, 'CSS3')
+    
+    def test_delete_tag(self):
+        """
+        method checks if saved tag can be deleted
+        """
+        self.tags.save_tags()
+        self.tags.delete_tags()
+        tags = Tags.objects.all()
+        self.assertTrue(len(tags) == 0)
+
+
