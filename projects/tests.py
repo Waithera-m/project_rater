@@ -104,4 +104,67 @@ class TagsModelTests(TestCase):
         tags = Tags.objects.all()
         self.assertTrue(len(tags) == 0)
 
+class ProjectModelTests(TestCase):
+    """
+    class facilitates the creation of test units for the project model
+    """
+    @factory.django.mute_signals(signals.pre_save, signals.post_save)
+    def setUp(self):
+        """
+        method defines the objects to be created before each test
+        """
+        self.tags = Tags.objects.create(name='HTML5')
+        self.userz = User.objects.create(username='fuzzy', first_name='namethree', last_name='othername', email='something00@something.com', password='somePassword5')
+        self.user_profile = Profile.objects.create(user=self.userz, bio='something boring', location='Fiji', profile_pic='base.jpg')
+        self.project = Project.objects.create(title='partage',creator=self.user_profile, project_image='partage.jpg', description='possibly blogging', live_link="movieshobuff@heroku.com", design=1, usability=1, content=1)
+        self.project.tags.add(self.tags)
+    
+    def tearDown(self):
+        """
+        method ensures that the database is pristine after all tests run
+        """
+        Tags.objects.all().delete()
+        Project.objects.all().delete()
+        Profile.objects.all().delete()
+    
+    def test_instance(self):
+        """
+        method tests if project object is initialized properly
+        """
+        self.assertIsInstance(self.project, Project)
 
+    def test_save_project(self):
+        """
+        method tests if an added project is saved
+        """
+        self.project.save_project()
+        projects = Project.objects.all()
+        self.assertTrue(len(projects) > 0)
+
+    def test_update_project(self):
+        """
+        method checks if a saved project can be updated
+        """
+        self.project.save_project()
+        Project.objects.filter(pk=self.project.pk).update(title='pomodoro')
+        self.project.update_project()
+        self.assertEqual(self.project.title, 'pomodoro')
+    
+    def test_delete_project(self):
+        """
+        method tests if a saved object can be deleted
+        """
+        self.project.save_project()
+        self.project.delete_project()
+        projects = Project.objects.all()
+        self.assertTrue(len(projects) == 0)
+
+    def test_search_by_title(self):
+        """
+        test checks if the search by title class method returns expected results
+        """
+        self.project.save_project()
+        found_project = Project.search_by_title(self.project.title)
+        initial_project = Project.objects.filter(pk=self.project.pk)
+        self.assertQuerysetEqual(found_project, initial_project, transform=lambda x:x) 
+        

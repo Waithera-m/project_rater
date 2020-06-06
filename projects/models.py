@@ -78,3 +78,36 @@ class Project(models.Model):
     usability = models.IntegerField(default=0)
     content = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.title
+
+    def save_project(self):
+        """
+        method saves added project object
+        """
+        self.save()
+    
+    def update_project(self, using=None, fields=None, **kwargs):
+        """
+        method updates saved project object
+        """
+        if fields is not None:
+            fields = set(fields)
+            deferred_fields = self.get_deferred_fields()
+            if fields.intersection(deferred_fields):
+                fields = fields.union(deferred_fields)
+        super().refresh_from_db(using, fields, **kwargs)
+    
+    def delete_project(self):
+        """
+        method deletes saved project object
+        """
+        self.delete()
+    
+    @classmethod
+    def search_by_title(cls, search_term):
+        """
+        method returns profiles that match the provided search term
+        """
+        projects = cls.objects.filter(title__icontains=search_term)
+        return projects
