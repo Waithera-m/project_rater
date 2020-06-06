@@ -15,18 +15,18 @@ class Profile(models.Model):
         """
         method saves added profile
         """
-        self.user
+        self.save()
     
-    # def update_profile(self, using=None, fields=None, **kwargs):
-    #     """
-    #     class method updates profile properties
-    #     """
-    #     if fields is not None:
-    #         fields = set(fields)
-    #         deferred_fields = self.get_deferred_fields()
-    #         if fields.intersection(deferred_fields):
-    #             fields = fields.union(deferred_fields)
-    #     super().refresh_from_db(using, fields, **kwargs)
+    def update_profile(self, using=None, fields=None, **kwargs):
+        """
+        class method updates profile properties
+        """
+        if fields is not None:
+            fields = set(fields)
+            deferred_fields = self.get_deferred_fields()
+            if fields.intersection(deferred_fields):
+                fields = fields.union(deferred_fields)
+        super().refresh_from_db(using, fields, **kwargs)
 
     def delete_profile(self):
         """
