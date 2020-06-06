@@ -77,6 +77,7 @@ class Project(models.Model):
     design = models.IntegerField(default=0)
     usability = models.IntegerField(default=0)
     content = models.IntegerField(default=0)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.title
