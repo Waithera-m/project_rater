@@ -1,0 +1,24 @@
+p {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 2px;
+    margin: 20px 0 30px;
+}
+
+p span {
+    background: #fff;
+    padding: 0 10px;
+}
+
+body {
+    font-family: 'Tenali Ramakrishna', sans-serif;
+    font-size: large;
+}
+
+.jumbotron {
+    background-image: url('https://bit.ly/2UgQo6P');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300px;
+}

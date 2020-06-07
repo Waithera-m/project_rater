@@ -20,4 +20,6 @@ urlpatterns = [
     path('', include('projects.urls')),
     path('admin/', admin.site.urls),
     path('tinymce', include('tinymce.urls')),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
