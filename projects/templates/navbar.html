@@ -1,0 +1,22 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Navbar</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://kit.fontawesome.com/79cafd0f3e.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="title navbar navbar-dark bg-dark navbar-fixed-top" role="navigation">
+            <div class="header container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand waves-effect waves-light lead" href="{% url 'projects:index' %}"><strong>Project-Rater</strong></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a style="color: white;" class="logout" href="/accounts/logout"><i style="margin-right: 5px; color: white;" class="fa fa-user"></i>{{request.user.username|upper}}<i style="margin-left: 10px; color: white;" class="fa fa-sign-out" aria-hidden="true">&nbsp;&nbsp;</i></a></li>
+            </ul>
+            </div>
+        </nav>
+    </body>
+</html>
