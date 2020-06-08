@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Profile, Tags, Project
+from .models import Profile, Tags, Project, Votes
 from django.contrib.auth.models import User
 import factory
 from django.db.models import signals
@@ -116,7 +116,7 @@ class ProjectModelTests(TestCase):
         self.tags = Tags.objects.create(name='HTML5')
         self.userz = User.objects.create(username='fuzzy', first_name='namethree', last_name='othername', email='something00@something.com', password='somePassword5')
         self.user_profile = Profile.objects.create(user=self.userz, bio='something boring', location='Fiji', profile_pic='base.jpg')
-        self.project = Project.objects.create(title='partage',creator=self.user_profile, project_image='partage.jpg', description='possibly blogging', live_link="movieshobuff@heroku.com", design=1, usability=1, content=1)
+        self.project = Project.objects.create(title='partage',creator=self.user_profile, project_image='partage.jpg', description='possibly blogging', live_link="movieshobuff@heroku.com")
         self.project.tags.add(self.tags)
     
     def tearDown(self):
@@ -168,3 +168,21 @@ class ProjectModelTests(TestCase):
         initial_project = Project.objects.filter(pk=self.project.pk)
         self.assertQuerysetEqual(found_project, initial_project, transform=lambda x:x) 
         
+class VotesModelTests(TestCase):
+    """
+    class facilitates the creation of Votes model's test units
+    """
+    def setUp(self):
+        """
+        class defines the properties of votes object to be created before each test
+        """
+        self.user_two = User.objects.create(username='fuzzy', first_name='namethree', last_name='othername', email='something00@something.com', password='somePassword5')
+        self.rater = Profile.objects.create(user=self.user_two, bio='something boring', location='Fiji', profile_pic='base.jpg')
+        self.project = Project.objects.create(title='partage',creator=self.rater, project_image='partage.jpg', description='possibly blogging', live_link="movieshobuff@heroku.com")
+        self.new_rating = Votes.objects.create(design=2, usability=6, content=5, project=self.project, rater=self.rater)
+    
+    def test_instance(self):
+        """
+        method tests if a rating object is initialized properly
+        """
+        self.assertIsInstance(self.new_rating, Votes)
