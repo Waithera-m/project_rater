@@ -41,6 +41,9 @@ class Tags(models.Model):
     """
     name = models.CharField(max_length=60)
 
+    def __str__(self):
+        return f'{self.name}'
+
     def save_tags(self):
         """
         method saves added tag
@@ -74,9 +77,6 @@ class Project(models.Model):
     description = HTMLField()
     live_link = models.CharField(max_length=200)
     tags = models.ManyToManyField(Tags)
-    design = models.IntegerField(default=0)
-    usability = models.IntegerField(default=0)
-    content = models.IntegerField(default=0)
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -112,3 +112,15 @@ class Project(models.Model):
         """
         projects = cls.objects.filter(title__icontains=search_term)
         return projects
+
+class Votes(models.Model):
+    """
+    class facilitates the creation of ratng objects
+    """
+    design = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
+    usability = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
+    content = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
+    project = models.ForeignKey(User, on_delete=models.CASCADE)
+    rater = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    def __str__(self):
+        return f'{self.rater.user.username}'

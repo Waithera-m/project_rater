@@ -27,44 +27,6 @@
                             <p><i>{{project.description|safe}}</i></p>
                             {% endautoescape %}
                             <a href="{{project.live_link}}" target="_blank"><i class="fa fa-external-link"></i></a>
-                            <div class="row">
-                                <button type="button" id="voteButton" style="margin-right: 10px;">Vote</button>
-                            </div>
-                            <div class="row">
-                                <form id="voteForm">
-                                    <h3>Design</h3>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='one' value='1'>1
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='two' value='2'>2
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='three' value='3'>3
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='four' value='4'>4
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='five' value='5'>5
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='six' value='6'>6
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='seven'>7
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='eight'>8
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='nine'>9
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name='ten' value='10'>10
-                                    </lable>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,10 +38,5 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             {% bootstrap_javascript %}
         {% endblock %}
-        <script>
-            $("#voteButton").click(function(){
-                $("#voteForm").toggle();
-            });
-        </script>
     </body>
 </html>
