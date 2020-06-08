@@ -85,7 +85,7 @@ def rate_project(request, project):
     if request.method == 'POST':
         form = VotesForm(request.POST)
         votes = form.save(commit=False)
-        votes.rater= request.user
+        votes.rater = request.user
         votes.project = project
         votes.save()
         project_ratings = Votes.objects.filter(project=project)
@@ -101,7 +101,10 @@ def rate_project(request, project):
         for c_rating in project_ratings:
             content_mean_rating.append(c_rating.content)
             content_average = sum(content_mean_rating)/len(content_mean_rating)
+        
+        votes.save()
         return HttpResponseRedirect(request.path_info)
     else:
         form = VotesForm()
-    return render(request, 'projects/rate.html', {'form':form, 'project':project})
+        project_ratings = Votes.objects.filter(project=project)
+    return render(request, 'projects/rate.html', {'form':form, 'project':project, 'project_ratings':project_ratings})

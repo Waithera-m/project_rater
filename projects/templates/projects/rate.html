@@ -39,7 +39,47 @@
                     </div>
                 </div>
             </div>
+            
         </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <h3>Project's Ratings</h3>
+                    <hr>
+                    <table class="table table-dark table-hover">
+                       <thead>
+                           <tr>
+                               <th scope="col">#</th>
+                               <th scope="col">User</th>
+                               <th scope="col">Design</th>
+                               <th scope="col">Usability</th>
+                               <th scope="col">Content</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <td>{{design_average}}</td>
+                               <td>{{usability_average}}</td>
+                               <td>{{content_average}}</td>
+                           </tr>
+                           {% if project_ratings %}
+                           {% for vote in project_ratings %}
+                           <tr class="rate{{vote.user.id}}">
+                               <th scope="row">{{forloop.counter}}</th>
+                               <td>{{vote.user.username}}</td>
+                               <td>{{vote.design}}</td>
+                               <td>{{vote.usability}}</td>
+                               <td>{{vote.content}}</td>
+                           </tr>
+                           {% endfor %}
+                           {% endif %}
+                       </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        <div class="container"></div>
         {% block scripts %}
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             {% bootstrap_javascript %}
