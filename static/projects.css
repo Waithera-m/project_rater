@@ -10,3 +10,6 @@ img {
 img:hover {
     opacity: 2.0;
 }
+#voteForm {
+    display: none;
+}
