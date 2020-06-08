@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile, Tags, Project, Votes
 from django.views import generic
-from .forms import RegistrationForm, ProjectsForm, VotesForm
+from .forms import RegistrationForm, ProjectsForm, VotesForm, ProfileForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.template import RequestContext
@@ -27,7 +27,7 @@ def user_profile(request, profile_id):
         profile = Profile.objects.filter(id=profile_id)
     except ObjectDoesNotExist:
         raise Http404
-    projects=Project.objects.filter(id=profile_id)
+    projects = Project.objects.filter(id=profile_id)
     return render(request, 'profile/profile.html', {'profile':profile, 'projects':projects})
 
 @login_required(login_url='/accounts/login')
@@ -108,3 +108,20 @@ def rate_project(request, project):
         form = VotesForm()
         project_ratings = Votes.objects.filter(project=project)
     return render(request, 'projects/rate.html', {'form':form, 'project':project, 'project_ratings':project_ratings})
+
+@login_required(login_url='/accounts/login/')
+def new_profile(request):
+    """
+    view function renders form for creating new profile
+    """
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+        return redirect('projects:index')
+    else:
+        form = ProfileForm()
+    return render(request, 'projects/new_profile.html', {"form":form})

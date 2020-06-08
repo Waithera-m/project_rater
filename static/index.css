@@ -2,6 +2,16 @@ body {
     font-family: 'Tenali Ramakrishna', sans-serif;
     font-size: large;
 }
+
 .card:hover {
-    transform: scale(1.2)
+    transform: scale(1.1)
+}
+
+.jumbotron {
+    text-align: center;
+    color: white;
+    background-image: linear-gradient(to right, rgba(141, 141, 209,0.6), rgb(0,0,5)), url('https://bit.ly/3h7kBiJ');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
 }

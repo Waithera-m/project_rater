@@ -10,7 +10,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.CharField(max_length=70)
     location = models.CharField(max_length=60)
-    profile_pic = models.ImageField(upload_to='profiles/')
+    profile_pic = models.ImageField(upload_to='profiles/', default='episode-1-wallpaper-16x9.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
     def save_profile(self):
         """

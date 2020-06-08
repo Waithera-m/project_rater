@@ -14,26 +14,20 @@
     </head>
     <body>
         {% include 'navbar.html' %}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <form class="navbar-form" role="search" action="{% url 'projects:search_results' %}">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search Project" name="project"></input>
-                        <button class="btn btn-outline-dark bt-sm" type="submit"><i class="fa fa-search" style="color: rgb(64, 87, 190);"></i>Search</button>
-                    </div>
-                </form>  
-                </div>
-                <div class="col-md-4"></div>
-            </div>
+        <div class="jumbotron">
+            <h1 style="margin-top: 60px;">Project Rater</h1>
+            <h3>Review and Ask Others To Review Your Site</h3>
+        </div>
+        <div class="container-fluid">
+            <h2 class="text-center">Projects to View and Review</h2>
+            <hr>
             <div class="row">
                 {% for project in projects %}
                     <div class="card mb-3" style="width: 20rem; margin-left: 35px;">
                         <img src="{{project.project_image.url}}" class="card-img-top">
                         <div class="card-body">
                             <div class="card-title">{{project.title}}</div>
-                            <a href="{% url 'projects:rate_project' project.title %}">View Project Details</a>
+                            <a style="font-size: small;" href="{% url 'projects:rate_project' project.title %}">View Project Details</a>
                         </div>
                     </div>
                 {% endfor %}

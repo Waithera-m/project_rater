@@ -14,7 +14,7 @@
     </head>
     <body>
         {% include 'navbar.html' %}
-        <div class="container">
+        <div class="container" style="margin-top: 50px; font-style: italic;">
             <div class="row">
                 {% if projects %}
                     <h2 style="margin-left: 250px;">Found {{ projects|length }} result of searched term {{message}}</h2>
@@ -22,12 +22,13 @@
                     <h2 style="margin-left: 250px;"> Found 0 projects for the search term {{message}}</h2>
                 {% endif %}
             </div>
-            <div class="row">
+            <div class="row" style="margin-top: 30px;">
                 {% for project in projects %}
                 <div class="card mb-3" style="width: 20rem; margin-left: 10px;">
                     <img src="{{project.project_image.url}}" class="card-img-top">
                     <div class="card-body">
                         <div class="card-title">{{project.title}}</div>
+                        <a style="font-size: small;" href="{% url 'projects:rate_project' project.title %}">View Project Details</a>
                     </div>
                 </div>
             {% endfor %}

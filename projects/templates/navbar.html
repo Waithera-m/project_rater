@@ -15,7 +15,13 @@
                 </div>
                 <ul class="nav navbar-nav ml-auto">
                     <li><a style="color: white; font-size: medium; margin-left: 10px;" href="{% url 'projects:profile' user.profile.id %}"><i style="margin-right: 5px; color: white;" class="fa fa-user"></i>{{request.user.username|title}}</li>
-                    <li><a style="color: white; font-size: medium;" class="logout" href="/accounts/logout"><i style="color: white;" class="fa fa-sign-out" aria-hidden="true">&nbsp;&nbsp;</i>Logout</a></li>
+                    <li><a style="color: white; font-size: medium;" class="logout" href="/accounts/logout"><i style="color: white;" class="fa fa-sign-out" aria-hidden="true">&nbsp;&nbsp;</i></a></li>
+                    <form class="navbar-form" role="search" action="{% url 'projects:search_results' %}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search Project" name="project"></input>
+                            <button class="btn btn-outline-dark bt-sm" type="submit"><i class="fa fa-search" style="color:white;"></i>Search</button>
+                        </div>
+                    </form>  
                 </ul>
             </div>
         </nav>

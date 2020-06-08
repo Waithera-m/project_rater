@@ -42,4 +42,12 @@ class VotesForm(forms.ModelForm):
     class Meta:
         model = Votes
         fields = ['design', 'usability', 'content']
+
+class ProfileForm(forms.ModelForm):
+    """
+    class facilitates the creation of profile form objects
+    """
+    class Meta:
+        model = Profile
+        exclude = ['user']
          
