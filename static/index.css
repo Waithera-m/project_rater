@@ -2,3 +2,6 @@ body {
     font-family: 'Tenali Ramakrishna', sans-serif;
     font-size: large;
 }
+.card:hover {
+    transform: scale(1.2)
+}
