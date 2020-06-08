@@ -26,7 +26,8 @@ def user_profile(request, profile_id):
         profile = Profile.objects.filter(id=profile_id)
     except ObjectDoesNotExist:
         raise Http404
-    return render(request, 'profile/profile.html', {'profile':profile})
+    projects=Project.objects.filter(id=profile_id)
+    return render(request, 'profile/profile.html', {'profile':profile, 'projects':projects})
 
 @login_required(login_url='/accounts/login')
 def add_project(request):

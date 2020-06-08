@@ -16,6 +16,14 @@
         {% include 'navbar.html' %}
         <div class="container">
             <h1>I am here</h1>
+            {% for project in projects %}
+                <div class="card mb-3" style="width: 20rem; margin-left: 10px;">
+                    <img src="{{project.project_image.url}}" class="card-img-top">
+                    <div class="card-body">
+                        <div class="card-title">{{project.title}}</div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </body>
 </html>
