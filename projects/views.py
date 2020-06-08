@@ -10,16 +10,12 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
-class IndexView(generic.TemplateView):
+def index(request):
     """
-    class returns the landing page
+    view function renders the landing page
     """
-    template_name = 'projects/index.html'
-    def get_queryset(self):
-        """
-        function returns added projects
-        """
-        return Profile.objects.all().order_by('-pub_date')
+    projects = Project.objects.all()
+    return render(request, 'projects/index.html', {'projects':projects})
 
 @login_required(login_url='/accounts/login')
 def user_profile(request, profile_id):

@@ -14,8 +14,8 @@
                 <a class="navbar-brand waves-effect waves-light lead" href="{% url 'projects:index' %}"><strong>Project-Rater</strong></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a style="color: white;" href="{% url 'projects:profile' user.profile.id %}"><i style="margin-right: 5px; color: white;" class="fa fa-user"></i>{{request.user.username|upper}}</li>
-                <li><a style="color: white;" class="logout" href="/accounts/logout"><i style="color: white;" class="fa fa-sign-out" aria-hidden="true">&nbsp;&nbsp;</i></a></li>
+                <li><a style="color: white; font-size: medium;" href="{% url 'projects:profile' user.profile.id %}"><i style="margin-right: 5px; color: white;" class="fa fa-user"></i>{{request.user.username|title}}</li>
+                <li><a style="color: white; font-size: medium;" class="logout" href="/accounts/logout"><i style="color: white;" class="fa fa-sign-out" aria-hidden="true">&nbsp;&nbsp;</i></a></li>
                 
             </ul>
             </div>
