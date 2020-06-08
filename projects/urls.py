@@ -8,6 +8,7 @@ app_name = 'projects'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('profile/<int:profile_id>', views.user_profile, name='profile'),
+    path('add_project', views.add_project, name='add_project'),
 ]
 
 if settings.DEBUG:

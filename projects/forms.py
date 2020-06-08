@@ -27,4 +27,13 @@ class RegistrationForm(forms.Form):
         )
         return new_user
 
-    
+class ProjectsForm(forms.ModelForm):
+    """
+    class facilitates the generation of a form to facilitate the addition of new projects
+    """
+    class Meta:
+        model = Project
+        exclude = ['creator', 'design', 'usability', 'content', 'pub_date'] 
+        widgets = {
+            'tags': forms.CheckboxSelectMultiple()
+        }  
