@@ -1,0 +1,40 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width initial-scale=1">
+        <title>Profile</title>
+        {% block styles %}
+            {% bootstrap_css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'projects.css' %}">
+        {% endblock %}
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
+    </head>
+    <body>
+        {% include 'navbar.html' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="card mb-3" style="width: 40rem;">
+                        <img class="card-img-top img-responsive" src="{{project.project_image.url}}">
+                        <div class="card-body">
+                            <div class="card-title"><strong>{{project.title}} by <i>{{project.creator.user.username}}</i></strong></div>
+                            
+                            {% autoescape on %}
+                            <p><i>{{project.description|safe}}</i></p>
+                            {% endautoescape %}
+                            <a href="{{project.live_link}}" target="_blank"><i class="fa fa-external-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+            </div>
+            
+        </div>
+    </body>
+</html>

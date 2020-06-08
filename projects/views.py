@@ -62,3 +62,10 @@ def search_by_project_title(request):
     else:
         message = 'Please enter a search term'
         return render(request, 'projects/results.html', {'message':message}) 
+
+class DetailView(generic.DetailView):
+    """
+    class renders view that displays project-specific details
+    """
+    model=Project
+    template_name='projects/detail.html'

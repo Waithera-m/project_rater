@@ -33,6 +33,7 @@
                         <img src="{{project.project_image.url}}" class="card-img-top">
                         <div class="card-body">
                             <div class="card-title">{{project.title}}</div>
+                            <a href="{% url 'projects:detail' project.id %}">View Project Details</a>
                         </div>
                     </div>
                 {% endfor %}
