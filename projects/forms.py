@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, Project
+from .models import Profile, Project, Votes
 
 class RegistrationForm(forms.Form):
     """
@@ -34,4 +34,12 @@ class ProjectsForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = ['creator', 'design', 'usability', 'content', 'pub_date'] 
+
+class VotesForm(forms.ModelForm):
+    """
+    class facilitates the generation of vote form objects
+    """
+    class Meta:
+        model = Votes
+        fields = ['design', 'usability', 'content']
          

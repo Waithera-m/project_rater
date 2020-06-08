@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect
-from .models import Profile, Tags, Project
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Profile, Tags, Project, Votes
 from django.views import generic
-from .forms import RegistrationForm, ProjectsForm
+from .forms import RegistrationForm, ProjectsForm, VotesForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
@@ -67,5 +68,40 @@ class DetailView(generic.DetailView):
     """
     class renders view that displays project-specific details
     """
-    model=Project
-    template_name='projects/detail.html'
+    model = Project
+    template_name = 'projects/detail.html'
+
+    def get_queryset(self):
+        return Project.objects.all()
+
+@login_required(login_url='/accounts/login')
+def rate_project(request, project):
+    """
+    view function renders rating and results views
+    """
+    project = Project.objects.filter(title=project).first()
+    current_user = request.user
+    votes = Votes.objects.filter(project=project)
+    if request.method == 'POST':
+        form = VotesForm(request.POST)
+        votes = form.save(commit=False)
+        votes.rater= request.user
+        votes.project = project
+        votes.save()
+        project_ratings = Votes.objects.filter(project=project)
+        design_mean_rating = []
+        for d_rating in project_ratings:
+            design_mean_rating.append(d_rating.design)
+            design_average = sum(design_mean_rating)/len(design_mean_rating)
+        usability_mean_rating = []
+        for u_rating in project_ratings:
+            usability_mean_rating.append(u_rating.usability)
+            usability_average = sum(usability_mean_rating)/len(usability_mean_rating)
+        content_mean_rating = []
+        for c_rating in project_ratings:
+            content_mean_rating.append(c_rating.content)
+            content_average = sum(content_mean_rating)/len(content_mean_rating)
+        return HttpResponseRedirect(request.path_info)
+    else:
+        form = VotesForm()
+    return render(request, 'projects/rate.html', {'form':form, 'project':project})

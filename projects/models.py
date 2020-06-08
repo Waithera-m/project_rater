@@ -120,7 +120,7 @@ class Votes(models.Model):
     design = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
     usability = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
     content = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    rater = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+    rater = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
-        return f'{self.rater.user.username}'
+        return f'{self.rater.username}'

@@ -11,6 +11,7 @@ urlpatterns = [
     path('add_project', views.add_project, name='add_project'),
     path('search', views.search_by_project_title, name='search_results'),
     path('<int:pk>', views.DetailView.as_view(), name='detail'),
+    path('rating/<project>', views.rate_project, name='rate_project'),
 ]
 
 if settings.DEBUG:

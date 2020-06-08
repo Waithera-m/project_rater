@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'tinymce',
     'django_registration',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
