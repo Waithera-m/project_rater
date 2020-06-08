@@ -34,6 +34,4 @@ class ProjectsForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = ['creator', 'design', 'usability', 'content', 'pub_date'] 
-        widgets = {
-            'tags': forms.CheckboxSelectMultiple()
-        }  
+         
