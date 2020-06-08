@@ -16,6 +16,18 @@
         {% include 'navbar.html' %}
         <div class="container">
             <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <form class="navbar-form" role="search" action="{% url 'projects:search_results' %}">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search Project" name="project"></input>
+                        <button class="btn btn-outline-dark bt-sm" type="submit"><i class="fa fa-search" style="color: rgb(64, 87, 190);"></i>Search</button>
+                    </div>
+                </form>  
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row">
                 {% for project in projects %}
                     <div class="card mb-3" style="width: 20rem; margin-left: 10px;">
                         <img src="{{project.project_image.url}}" class="card-img-top">

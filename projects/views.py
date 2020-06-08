@@ -48,3 +48,17 @@ def add_project(request):
             else:
                 form = ProjectsForm()
     return render(request, 'projects/upload_project.html', {'form':form, 'profiles':profiles})
+
+@login_required(login_url='/accounts/login')
+def search_by_project_title(request):
+    """
+    view function renders template that displays search results
+    """
+    if 'project' in request.GET and request.GET['project']:
+       search_term = request.GET.get('project')
+       projects = Project.search_by_title(search_term)
+       message = f'{search_term}'
+       return render(request, 'projects/results.html', {'message':message, 'projects':projects})
+    else:
+        message = 'Please enter a search term'
+        return render(request, 'projects/results.html', {'message':message}) 
