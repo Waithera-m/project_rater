@@ -13,6 +13,8 @@ urlpatterns = [
     path('<int:pk>', views.DetailView.as_view(), name='detail'),
     path('rating/<project>', views.rate_project, name='rate_project'),
     path('new_profile/', views.new_profile, name='new_profile'),
+    path('api/projects', views.ProjectList.as_view()),
+    path('api/project/project-id/<pk>', views.PostDescription.as_view()),
 ]
 
 if settings.DEBUG:

@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('', include('projects.urls')),
@@ -22,4 +23,5 @@ urlpatterns = [
     path('tinymce', include('tinymce.urls')),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('api-token-auth/', obtain_auth_token),
 ]
