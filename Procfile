@@ -1,1 +1,1 @@
-web: gunicorn project_rater.wsgi --log-file -
+web: gunicorn project_rater.wsgi,py --log-file -
