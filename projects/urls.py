@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/projects', views.ProjectList.as_view()),
     path('api/project/project-id/<pk>', views.PostDescription.as_view()),
     path('api/users', views.UsersList.as_view()),
+    path('ajax/rating', views.rating, name="rating"),
 ]
 
 if settings.DEBUG:

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from rest_framework.response import Response
@@ -113,6 +113,18 @@ def rate_project(request, project):
         form = VotesForm()
         project_ratings = Votes.objects.filter(project=project)
     return render(request, 'projects/rate.html', {'form':form, 'project':project, 'project_ratings':project_ratings})
+
+def rating(request):
+    """
+    ajax view function
+    """
+    design = request.POST.get('design')
+    usability = request.POST.get('usability')
+    content = request.POST.get('content')
+    votes = Votes(design=design, usability=usability, content=content)
+    votes.save()
+    data = {'success': 'Thank you for voting'}
+    return JsonResponse(data)
 
 @login_required(login_url='/accounts/login/')
 def new_profile(request):

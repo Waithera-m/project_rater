@@ -12,6 +12,8 @@
             <div class="header container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand waves-effect waves-light lead" href="{% url 'projects:index' %}"><strong>Project-Rater</strong></a>
+                    <a style="color:white; font-size:small;" href="/api/projects">Projects API</a>
+                    <a style="color:white; font-size:small;" href="/api/users">Users API</a>
                 </div>
                 <ul class="nav navbar-nav ml-auto">
                     <li><a style="color: white; font-size: medium; margin-left: 10px;" href="{% url 'projects:profile' user.profile.id %}"><i style="margin-right: 5px; color: white;" class="fa fa-user"></i>{{request.user.username|title}}</li>
