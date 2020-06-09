@@ -16,6 +16,7 @@ from rest_framework import status
 from .permissions import IsAuthenticatedOrReadOnly
 
 # Create your views here.
+@login_required(login_url='/accounts/login')
 def index(request):
     """
     view function renders the landing page
@@ -106,7 +107,6 @@ def rate_project(request, project):
         for c_rating in project_ratings:
             content_mean_rating.append(c_rating.content)
             content_average = sum(content_mean_rating)/len(content_mean_rating)
-        
         votes.save()
         return HttpResponseRedirect(request.path_info)
     else:

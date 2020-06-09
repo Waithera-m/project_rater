@@ -68,7 +68,7 @@
                            {% for vote in project_ratings %}
                            <tr class="rate{{vote.user.id}}">
                                <th scope="row">{{forloop.counter}}</th>
-                               <td>{{vote.user.username}}</td>
+                               <td>{{vote.user.rater}}</td>
                                <td>{{vote.design}}</td>
                                <td>{{vote.usability}}</td>
                                <td>{{vote.content}}</td>
