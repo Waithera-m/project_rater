@@ -19,6 +19,7 @@ To use the application, users need internet access and web browsers, preferably 
 ## Behavior Driven Development (BDD)
 
 #### Landing View
+![image](https://user-images.githubusercontent.com/60571734/84142752-08d44c00-aa5e-11ea-96b1-aa9085cca58d.png)
 
 
 
