@@ -11,7 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import ProjectSerializer, PostSerializer
+from .serializer import ProjectSerializer, PostSerializer, UserSerializer, ProfileSerializer
 from rest_framework import status
 from .permissions import IsAuthenticatedOrReadOnly
 
@@ -175,3 +175,19 @@ class PostDescription(APIView):
         project = self.get_project(pk)
         project.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class UsersList(APIView):
+    """
+    class view inherits from APIView
+    """
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    def get(self, request, format=None):
+        all_users = Profile.objects.all()
+        serializers = ProfileSerializer(all_users, many=True)
+        return Response(serializers.data)
+    def post(self, request, format=None):
+        serializers = ProfileSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.Http_400_BAD_REQUEST)

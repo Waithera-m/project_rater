@@ -15,6 +15,7 @@ urlpatterns = [
     path('new_profile/', views.new_profile, name='new_profile'),
     path('api/projects', views.ProjectList.as_view()),
     path('api/project/project-id/<pk>', views.PostDescription.as_view()),
+    path('api/users', views.UsersList.as_view()),
 ]
 
 if settings.DEBUG:
