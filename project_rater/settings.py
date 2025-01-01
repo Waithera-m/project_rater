@@ -32,6 +32,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -92,6 +95,7 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
+        'PORT': 5432,
     }
 }
 
